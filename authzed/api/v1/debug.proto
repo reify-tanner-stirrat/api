@@ -7,6 +7,7 @@ import "google/protobuf/struct.proto";
 
 option go_package = "github.com/authzed/authzed-go/proto/authzed/api/v1";
 option java_package = "com.authzed.api.v1";
+option java_multiple_files = true;
 
 // DebugInformation defines debug information returned by an API call in a footer when
 // requested with a specific debugging header.
@@ -72,32 +73,4 @@ message CheckDebugTrace {
     // and a permissionship of PERMISSIONSHIP_HAS_PERMISSION indicates the subject was found within this relation.
     SubProblems sub_problems = 7;
   }
-}
-
-// CaveatEvalInfo holds information about a caveat expression that was evaluated.
-message CaveatEvalInfo {
-  enum Result {
-    RESULT_UNSPECIFIED = 0;
-
-    RESULT_UNEVALUATED = 1;
-
-    RESULT_FALSE = 2;
-    RESULT_TRUE = 3;
-    RESULT_MISSING_SOME_CONTEXT = 4;
-  }
-
-  // expression is the expression that was evaluated.
-  string expression = 1;
-
-  // result is the result of the evaluation.
-  Result result = 2;
-
-  // context consists of any named values that were used for evaluating the caveat expression.
-  google.protobuf.Struct context = 3;
-
-  // partial_caveat_info holds information of a partially-evaluated caveated response, if applicable.
-  PartialCaveatInfo partial_caveat_info = 4;
-
-  // caveat_name is the name of the caveat that was executed, if applicable.
-  string caveat_name = 5;
 }
